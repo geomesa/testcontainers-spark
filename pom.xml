@@ -86,6 +86,7 @@
                         <version>${central.publishing.maven.plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
+                            <deploymentName>testcontainers-spark-${project.version}</deploymentName>
                             <!-- used to lookup credentials in ~/.m2/settings.xml -->
                             <publishingServerId>sonatype</publishingServerId>
                         </configuration>
