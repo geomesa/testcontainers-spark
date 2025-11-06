@@ -159,7 +159,9 @@ public class SparkCluster implements Startable {
             var urls = SparkCluster.class.getClassLoader().getResources("org/locationtech/geomesa/geomesa.properties");
             while (urls.hasMoreElements()) {
                 var uri = urls.nextElement().toURI();
-                if ("jar".equals(uri.getScheme()) && uri.toString().contains("spark-runtime")) {
+                if ("jar".equals(uri.getScheme()) &&
+                        // patterns for: geomesa 6+ || earlier
+                        (uri.toString().contains("-runtime.jar") || uri.toString().contains("spark-runtime"))) {
                     // uris look like: jar://file://foo.jar!/path/in/jar
                     var jar = uri.toString().substring(4).replaceAll("\\.jar!.*", ".jar");
                     jars.add(Paths.get(URI.create(jar)).toFile());
